@@ -1,4 +1,4 @@
-. .\baseProfile.ps1
+. .\base.ps1
 
 choco install git.install -y --force
 choco install 7zip.install -y --force

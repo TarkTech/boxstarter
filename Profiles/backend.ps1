@@ -1,4 +1,4 @@
-. .\devProfile.ps1
+. .\dev.ps1
 
 choco install visualstudio2022community -y --force
 choco install sql-server-management-studio -y --force
