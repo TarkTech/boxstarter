@@ -1,4 +1,4 @@
-. .\dev.ps1
+. .\Profiles\dev.ps1
 
-choco install androidstudio -y --force
-choco install xamarin-studio -y --force
+choco install androidstudio -y 
+choco install xamarin-studio -y 

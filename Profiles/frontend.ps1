@@ -1,3 +1,3 @@
-. .\dev.ps1
+. .\Profiles\dev.ps1
 
-choco install vscode -y --force
+choco install vscode -y 

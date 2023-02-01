@@ -1,3 +1,3 @@
-. .\base.ps1
+. .\Profiles\base.ps1
 
-choco install slack -y --force
+choco install slack -y 

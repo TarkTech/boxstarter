@@ -1,6 +1,6 @@
-. .\base.ps1
+. .\Profiles\base.ps1
 
-choco install git.install -y --force
-choco install 7zip.install -y --force
-choco install winrar -y --force
-choco install nodejs.install -y --force
+choco install git.install -y 
+choco install 7zip.install -y 
+choco install winrar -y 
+choco install nodejs.install -y 
