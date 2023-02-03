@@ -2,7 +2,7 @@ function PrintProfileNames {
     # Get profile names from the Profiles folder
     $profiles = GetProfileNames
 
-    Write-Host "`nProfiles Names:`n"
+    Write-Host "`nProfile Names:`n"
 
     # Print the profile name
     $count = 1
@@ -64,7 +64,7 @@ while (-not ($profiles -contains $profile)) {
     Write-Host "`nProfile does not exist"
     PrintProfileNames
     $profile = Read-Host -Prompt "Enter the profile name "
-    Write-Host "`nEntered profile name: $profile`n"
+    Write-Host "`nSelected profile name: $profile`n"
 }
 
 .\supportingFile.ps1 -profile $profile
