@@ -67,4 +67,4 @@ while (-not ($profiles -contains $profile)) {
     Write-Host "`nEntered profile name: $profile`n"
 }
 
-.\installation.ps1 -profile $profile
+.\supportingFile.ps1 -profile $profile
