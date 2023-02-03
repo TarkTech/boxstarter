@@ -25,6 +25,8 @@ Write-Host "`nInstalling Git"
 
 winget install git.git -h --accept-package-agreements --accept-source-agreements
 
+refreshenv
+
 Write-Host "`nGit Installed"
 
 cd C:/
