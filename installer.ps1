@@ -21,9 +21,15 @@ function GetProfileNames {
     return $profiles
 }
 
+# installation of chocolaty
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
 Write-Host "`nInstalling Git"
 
-winget install git.git -h --accept-package-agreements --accept-source-agreements
+choco install git.install -y
+
+$env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."   
+Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 
 refreshenv
 
