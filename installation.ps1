@@ -9,4 +9,4 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 Install-BoxstarterPackage -PackageName ".\Profiles\$profile.ps1" -DisableReboots
 
 # Reboot the machine
-shutdown /r /t 0
+shutdown /r /t 30
