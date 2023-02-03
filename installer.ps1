@@ -76,3 +76,8 @@ while (-not ($profiles -contains $profile)) {
 }
 
 .\supportingFile.ps1 -profile $profile
+
+.\uninstall.ps1
+
+# Reboot the machine
+shutdown /r /t 30
