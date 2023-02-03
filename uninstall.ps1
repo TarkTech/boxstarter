@@ -13,6 +13,3 @@ $env:PATH = ($env:PATH -split ';' | Where-Object { $_ -notlike '*Boxstarter*' })
 # Remove Boxstarter from the PSModulePath in both the current session and the system
 $env:PSModulePath = ($env:PSModulePath -split ';' | Where-Object { $_ -notlike '*Boxstarter*' }) -join ';'
 [Environment]::SetEnvironmentVariable('PSModulePath', $env:PSModulePath, 'Machine')
-
-# Reboot the machine
-shutdown /r /t 0
