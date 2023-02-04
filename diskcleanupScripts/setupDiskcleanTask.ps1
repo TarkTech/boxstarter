@@ -64,8 +64,11 @@ $info = Get-ScheduledTask $taskName -ErrorAction SilentlyContinue
 # If the task does not exist, create it
 if (!$info) {
     Write-Host "Task does not exist"
-    $taskAction = New-ScheduledTaskAction -Execute "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Argument "-File C:\boxstarter\diskcleanupScripts\setupDiskcleanTask.ps1"
-    $taskTrigger = New-ScheduledTaskTrigger -AtLogon
-    Register-ScheduledTask -TaskName $taskName -Description $taskName -Action $taskAction -Trigger $taskTrigger -RunLevel Highest -User SYSTEM
+    $taskAction = New-ScheduledTaskAction -Execute "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Argument "cd C:\boxstarter; git pull; Start-Process powershell -ArgumentList 'C:\boxstarter\diskcleanupScripts\setupDiskcleanTask.ps1' -Verb RunAs"
+    $taskTrigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Wednesday -At 12pm
+    Register-ScheduledTask -TaskName $taskName -Description $taskName -Action $taskAction -Trigger $taskTrigger -RunLevel Highest
     Write-Host "$taskName Task created successfully"
+} else {
+    Write-Host "$taskName Task already exists"
+    Set-ScheduledTask -TaskName $taskName -Trigger $taskTrigger
 }
