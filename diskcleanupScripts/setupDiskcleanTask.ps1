@@ -6,6 +6,45 @@ function RemoveDirectoryFiles {
     Remove-Item -Path "$Path\*" -Recurse -Force -ErrorAction SilentlyContinue
 }
 
+# installation of chocolaty
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+Write-Host "`nInstalling Git"
+
+choco install git.install -y
+
+$env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."   
+Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+
+refreshenv
+
+Write-Host "`nGit Installed"
+
+cd C:/
+
+# Check if the folder exists
+if (Test-Path -Path "C:/boxstarter") {
+    Write-Host "`nBoxstarter Repo Already Cloned"
+} else {
+    Write-Host "`nFolder does not exist"
+
+    Write-Host "`nCloning Boxstarter"
+
+    # Clone the repository
+    git clone https://git.tarktech.com/utsav.songara/boxstarter.git
+
+    Write-Host "`nCloning Complete"
+}
+
+cd boxstarter
+
+Write-Host "`nPulling latest changes"
+
+# Pull the latest changes
+git pull
+
+Write-Host "`nPulling Complete"
+
 # Remove all files in the TEMP directory
 $tempFilePath = [System.IO.Path]::GetTempPath()
 
@@ -25,10 +64,8 @@ $info = Get-ScheduledTask $taskName -ErrorAction SilentlyContinue
 # If the task does not exist, create it
 if (!$info) {
     Write-Host "Task does not exist"
-    $taskAction = New-ScheduledTaskAction -Execute "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Argument "-File C:\StartupScripts\RemoveTempFiles.ps1"
+    $taskAction = New-ScheduledTaskAction -Execute "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Argument "-File C:\boxstarter\diskcleanupScripts\setupDiskcleanTask.ps1"
     $taskTrigger = New-ScheduledTaskTrigger -AtLogon
     Register-ScheduledTask -TaskName $taskName -Description $taskName -Action $taskAction -Trigger $taskTrigger -RunLevel Highest -User SYSTEM
     Write-Host "$taskName Task created successfully"
 }
-
-Read-Host "Press any key to continue..."
