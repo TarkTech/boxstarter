@@ -16,7 +16,7 @@ function PrintProfileNames {
 
 function GetProfileNames {
     # Get profile names from the Profiles folder
-    $profiles = Get-ChildItem -Path ".\Profiles" -Filter "*.ps1" | Select-Object -ExpandProperty Name | ForEach-Object { $_.Replace(".ps1", "") }
+    $profiles = Get-ChildItem -Path ".\Profiles" -Exclude "_*" | Select-Object -ExpandProperty Name | Where Name -match '' | ForEach-Object { $_.Replace(".ps1", "") }
 
     return $profiles
 }
