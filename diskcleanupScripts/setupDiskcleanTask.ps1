@@ -61,7 +61,7 @@ $taskName = "RemoveTempFiles"
 # Check if the task already exists
 $info = Get-ScheduledTask $taskName -ErrorAction SilentlyContinue
 
-$taskAction = New-ScheduledTaskAction -Execute "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Argument "cd C:\boxstarter; git pull; Start-Process powershell -ArgumentList 'C:\boxstarter\diskcleanupScripts\setupDiskcleanTask.ps1' -Verb RunAs"
+$taskAction = New-ScheduledTaskAction -Execute "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Argument "Start-Process powershell -ArgumentList 'cd C:\boxstarter; git pull;cd diskcleanupScripts; .\setupDiskcleanTask.ps1' -Verb RunAs"
 $taskTrigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Wednesday -At 12pm
 # If the task does not exist, create it
 if (!$info) {
