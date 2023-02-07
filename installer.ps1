@@ -46,7 +46,7 @@ if (Test-Path -Path "C:/boxstarter") {
     Write-Host "`nCloning Boxstarter"
 
     # Clone the repository
-    git clone https://git.tarktech.com/utsav.songara/boxstarter.git
+    git clone https://git.tarktech.com/tark-tech/boxstarter.git
 
     Write-Host "`nCloning Complete"
 }
