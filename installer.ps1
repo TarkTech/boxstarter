@@ -77,10 +77,15 @@ while (-not ($profiles -contains $profile)) {
 
 .\supportingFile.ps1 -profile $profile
 
-.\uninstall.ps1
-
 # Set wallpaper
 .\setupWallpaper\setWallpaper.ps1
+
+# Run disk cleanup task
+.\diskcleanupScripts\setupRegistry.bat
+.\diskcleanupScripts\setupDiskcleanTask.ps1
+
+# Uninstall Boxstarter
+.\uninstall.ps1
 
 # Reboot the machine
 shutdown /r /t 30
