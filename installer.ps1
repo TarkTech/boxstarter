@@ -79,5 +79,8 @@ while (-not ($profiles -contains $profile)) {
 
 .\uninstall.ps1
 
+# Set wallpaper
+.\setupWallpaper\setWallpaper.ps1
+
 # Reboot the machine
 shutdown /r /t 30
