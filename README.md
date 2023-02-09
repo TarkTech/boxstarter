@@ -1,15 +1,5 @@
-## Installation
+# Installation
 
-Open PowerShell terminal as administrator and run below command
+Download Tark-Installer.exe file from <a href="https://git.tarktech.com/pub/boxstarter/-/raw/main/Tark-Installer.exe?inline=false" target="_blank">Click here</a>
 
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://git.tarktech.com/api/v4/projects/254/repository/files/installer.ps1/raw/?ref=main'));
-```
-
-## Cleanup Junk files
-
-Open PowerShell terminal as administrator and run below command
-
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; ((New-Object System.Net.WebClient).DownloadString('https://git.tarktech.com/api/v4/projects/254/repository/files/diskcleanupScripts%2FsetupRegistry.bat/raw/?ref=main')) | cmd; iex ((New-Object System.Net.WebClient).DownloadString('https://git.tarktech.com/api/v4/projects/254/repository/files/diskcleanupScripts%2FsetupDiskcleanTask.ps1/raw/?ref=main')); C:\boxstarter\setupWallpaper\setWallpaper.ps1;
-```
+Run Tark-Installer.exe file from your download directory
