@@ -1,11 +1,10 @@
 ## Summary
 
-- Easy to setup new windows machine softwares using powershell script.
-- User don't worried about how to download software and installing software on your systems.
-- User need to run software installation script on powershell that ask only your profile name on that based your required software auto install on your system.
+- One click setup.
+- Prompts to configure softwares while setup
 - Script auto set wallpaper on your system.
-- We provide auto cleanup temp files on system at every week wednesday that script cleanup temp file & other unnessesary files on your system.
-- For start intallation only run single command and your software installation will start.
+- Personalize desktop
+- Performs auto cleanup regularly
 
 ---
 
@@ -22,7 +21,7 @@ Profiles
     └── qa
 ```
 
-- **If you choice backend profile that installing backend profile & also installing dev profile & base profile softwares.**
+- **Qa profile will setup only based profile while developers will have dev as well as base profile to configure and personalize softwares**
 
 ---
 
@@ -51,9 +50,10 @@ Profiles
 > **qa profile**
 - notepad++
 
+
 ---
 
-## Start Software Installation
+## Start software installation
 
 > Open PowerShell terminal as administrator and run below command
 
@@ -61,7 +61,7 @@ Profiles
 Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://git.tarktech.com/api/v4/projects/254/repository/files/installer.ps1/raw/?ref=main'));
 ```
 
-## Setup autocleanup junk files on every wednesday
+## Setup auto cleanup junk files on every wednesday
 
 > Open PowerShell terminal as administrator and run below command
 
