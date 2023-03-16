@@ -70,5 +70,5 @@ if (!$info) {
     Write-Host "$taskName Task created successfully"
 } else {
     Write-Host "$taskName Task already exists"
-    Set-ScheduledTask -TaskName $taskName -Trigger $taskTrigger
+    Set-ScheduledTask -TaskName $taskName -Trigger $taskTrigger -Action $taskAction
 }

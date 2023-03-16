@@ -14,11 +14,11 @@
 Profiles
 
     base
-    |── dev
-    |  ├── frontend
-    |  |── backend
-    |  └── mobile
-    └── qa
+    |-- dev
+    |  +-- frontend
+    |  |-- backend
+    |  +-- mobile
+    +-- qa
 ```
 
 - **Qa profile will setup only based profile while developers will have dev as well as base profile to configure and personalize softwares**
