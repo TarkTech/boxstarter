@@ -14,9 +14,8 @@
 Profiles
 
     base
-    |-- dev
-    |  +-- frontend
-    |  |-- backend
+    |-- frontend
+    |  +-- full stack
     |  +-- mobile
     +-- qa
 ```
@@ -26,30 +25,13 @@ Profiles
 ---
 
 ## Software installation list
-
-> **base profile**
-- googlechrome
-- firefox
-- sharex
-- microsoft-teams
-- remove unnessasary software from system
-
-> **dev profile**
-- git
-- nodejs
-- vscode
-
-> **backend profile**
-- visualstudio2022 ( community addition )
-- dotnet-sdk-6.0
-
-> **mobile profile**
-- android-studio 
-- xamarin-studio
-
-> **qa profile**
-- notepad++
-
+| Profile  | Installation Software List |
+| ------------- | ------------- |
+| Base  | googlechrome, firefox, sharex, microsoft-teams, remove unnessasary software from system |
+| Frontend  | git, nodejs, vscode  |
+| FullStack  |  visualstudio2022 ( community addition ), dotnet-sdk-6.0 |
+| Mobile  |  android-studio, xamarin-studio |
+| QA  |  notepad++ |
 
 ---
 
