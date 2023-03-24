@@ -47,7 +47,7 @@ if (Get-Command winget -ErrorAction SilentlyContinue) {
 
 Write-Host "`nInstalling Git"
 
-winget install -e --id Git.Git;
+winget install -e --silent --id Git.Git;
 
 refreshenv
 
