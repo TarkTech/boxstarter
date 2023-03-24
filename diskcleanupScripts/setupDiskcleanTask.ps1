@@ -6,15 +6,9 @@ function RemoveDirectoryFiles {
     Remove-Item -Path "$Path\*" -Recurse -Force -ErrorAction SilentlyContinue
 }
 
-# installation of chocolaty
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
 Write-Host "`nInstalling Git"
 
-choco install git.install -y
-
-$env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."   
-Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+winget install -e --silent --id Git.Git;
 
 refreshenv
 
