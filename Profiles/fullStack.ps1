@@ -1,4 +1,4 @@
 . .\Profiles\frontend.ps1
 
-choco install visualstudio2022community -y 
-choco install dotnet-6.0-sdk -y 
+winget install -e --id Microsoft.VisualStudio.2022.Community;
+winget install -e --id Microsoft.DotNet.SDK.6;
