@@ -9,9 +9,8 @@ Function GetProfileNameFromUserSelection (){
     $currentSelection = 0
     $enterPressed = $False
     
-    Clear-Host
-
     While($enterPressed -eq $False){
+        Clear-Host
         
         Write-Host "$profileSelectionTitle"
 
@@ -31,7 +30,6 @@ Function GetProfileNameFromUserSelection (){
             13{
                 $enterPressed = $True
                 Return $profileOptions[$currentSelection]
-                Clear-Host
                 break
             }
 
@@ -41,7 +39,6 @@ Function GetProfileNameFromUserSelection (){
                 } Else {
                     $currentSelection -= 1
                 }
-                Clear-Host
                 break
             }
 
@@ -51,11 +48,9 @@ Function GetProfileNameFromUserSelection (){
                 } Else {
                     $currentSelection += 1
                 }
-                Clear-Host
                 break
             }
             Default{
-                Clear-Host
             }
         }
     }
