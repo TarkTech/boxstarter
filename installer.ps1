@@ -1,4 +1,4 @@
-Function GetProfileNameFromUserSelection (){ 
+function GetProfileNameFromUserSelection{ 
     
     #This function is used to get the profile name from the user selection
     $profileSelectionTitle = "Choose your installatoin profile?"
