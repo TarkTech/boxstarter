@@ -1,5 +1,5 @@
 . .\Profiles\_base.ps1
 
-choco install git.install -y 
-choco install nodejs.install -y 
-choco install vscode -y 
+winget install -e --silent --id Git.Git;
+winget install -e --silent --id OpenJS.NodeJS;
+winget install -e --silent --id Microsoft.VisualStudioCode;

@@ -1,17 +1,59 @@
-function PrintProfileNames {
-    # Get profile names from the Profiles folder
-    $profiles = GetProfileNames
+Function GetProfileNameFromUserSelection (){ 
+    
+    #This function is used to get the profile name from the user selection
+    $profileSelectionTitle = "Choose your installatoin profile?"
 
-    Write-Host "`nProfile Names:`n"
+    $profileOptions = GetProfileNames
 
-    # Print the profile name
-    $count = 1
-    foreach ($profile in $profiles) {
-        Write-Host $count $profile
-        $count++
+    $maxProfileOptionsCount = $profileOptions.count-1
+    $currentSelection = 0
+    $enterPressed = $False
+    
+    While($enterPressed -eq $False){
+        Clear-Host
+        
+        Write-Host "$profileSelectionTitle"
+
+        For ($i=0; $i -lt $profileOptions.count; $i++){
+
+            If(($i) -eq $currentSelection){
+                Write-Host -BackgroundColor cyan -ForegroundColor Black "$($profileOptions[$i])"
+            } Else {
+                Write-Host "$($profileOptions[$i])"
+            }
+
+        }
+
+        $keyInput = $host.ui.rawui.readkey("NoEcho,IncludeKeyDown").virtualkeycode
+
+        Switch($keyInput){
+            13{
+                $enterPressed = $True
+                Return $profileOptions[$currentSelection]
+                break
+            }
+
+            38{ #Up
+                If (($currentSelection - 1) -lt 0){
+                    $currentSelection = 0
+                } Else {
+                    $currentSelection -= 1
+                }
+                break
+            }
+
+            40{ #Down
+                If ($currentSelection + 1 -gt $maxProfileOptionsCount){
+                    $currentSelection = $maxProfileOptionsCount
+                } Else {
+                    $currentSelection += 1
+                }
+                break
+            }
+            Default{
+            }
+        }
     }
-
-    Write-Host "`n"
 }
 
 function GetProfileNames {
@@ -21,15 +63,33 @@ function GetProfileNames {
     return $profiles
 }
 
-# installation of chocolaty
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+# installation of winget
+
+if (Get-Command winget -ErrorAction SilentlyContinue) {
+    Write-Host "`nWinget already installed"
+} else {
+    Write-Host "`nWinget not installed"
+
+    Write-Host "`nInstalling winget"
+
+    # Install winget
+    $ProgressPreference='Silent'
+    Invoke-WebRequest -Uri https://github.com/microsoft/winget-cli/releases/download/v1.3.2691/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -OutFile .\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+    Invoke-WebRequest -Uri https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx -OutFile Microsoft.VCLibs.x64.14.00.Desktop.appx
+    Add-AppxPackage Microsoft.VCLibs.x64.14.00.Desktop.appx
+    Add-AppxPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+    
+    # Remove downloaded files
+    Remove-Item .\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+    Remove-Item .\Microsoft.VCLibs.x64.14.00.Desktop.appx
+
+    Write-Host "`nWinget installed"
+}
+
 
 Write-Host "`nInstalling Git"
 
-choco install git.install -y
-
-$env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."   
-Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+winget install -e --silent --id Git.Git;
 
 refreshenv
 
@@ -60,22 +120,13 @@ git pull
 
 Write-Host "`nPulling Complete"
 
-PrintProfileNames
+$selectedProfileName = GetProfileNameFromUserSelection
 
-# Get profile names from the Profiles folder
-$profiles = GetProfileNames
+Write-Host "`nSelected profile name: $selectedProfileName`n"
 
-$profile = Read-Host -Prompt "Enter the profile name "
+.\supportingFile.ps1 -profile $selectedProfileName
 
-# Until the profile name is not in the list, keep asking the user to enter the profile name
-while (-not ($profiles -contains $profile)) {
-    Write-Host "`nProfile does not exist"
-    PrintProfileNames
-    $profile = Read-Host -Prompt "Enter the profile name "
-    Write-Host "`nSelected profile name: $profile`n"
-}
-
-.\supportingFile.ps1 -profile $profile
+winget upgrade --all
 
 # Set wallpaper
 .\setupWallpaper\setWallpaper.ps1

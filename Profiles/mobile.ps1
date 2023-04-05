@@ -1,3 +1,3 @@
 . .\Profiles\frontend.ps1
 
-choco install androidstudio -y 
+winget install -e --silent --id Google.AndroidStudio;

@@ -1,3 +1,3 @@
 . .\Profiles\_base.ps1
 
-choco install notepadplusplus -y
+winget install -e --silent --id Notepad++.Notepad++
