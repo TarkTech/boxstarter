@@ -1,17 +1,59 @@
-function PrintProfileNames {
-    # Get profile names from the Profiles folder
-    $profiles = GetProfileNames
+Function GetProfileNameFromUserSelection (){ 
+    
+    #This function is used to get the profile name from the user selection
+    $profileSelectionTitle = "Choose your installatoin profile?"
 
-    Write-Host "`nProfile Names:`n"
+    $profileOptions = GetProfileNames
 
-    # Print the profile name
-    $count = 1
-    foreach ($profile in $profiles) {
-        Write-Host $count $profile
-        $count++
+    $maxProfileOptionsCount = $profileOptions.count-1
+    $currentSelection = 0
+    $enterPressed = $False
+    
+    While($enterPressed -eq $False){
+        Clear-Host
+        
+        Write-Host "$profileSelectionTitle"
+
+        For ($i=0; $i -lt $profileOptions.count; $i++){
+
+            If(($i) -eq $currentSelection){
+                Write-Host -BackgroundColor cyan -ForegroundColor Black "$($profileOptions[$i])"
+            } Else {
+                Write-Host "$($profileOptions[$i])"
+            }
+
+        }
+
+        $keyInput = $host.ui.rawui.readkey("NoEcho,IncludeKeyDown").virtualkeycode
+
+        Switch($keyInput){
+            13{
+                $enterPressed = $True
+                Return $profileOptions[$currentSelection]
+                break
+            }
+
+            38{ #Up
+                If (($currentSelection - 1) -lt 0){
+                    $currentSelection = 0
+                } Else {
+                    $currentSelection -= 1
+                }
+                break
+            }
+
+            40{ #Down
+                If ($currentSelection + 1 -gt $maxProfileOptionsCount){
+                    $currentSelection = $maxProfileOptionsCount
+                } Else {
+                    $currentSelection += 1
+                }
+                break
+            }
+            Default{
+            }
+        }
     }
-
-    Write-Host "`n"
 }
 
 function GetProfileNames {
@@ -78,22 +120,11 @@ git pull
 
 Write-Host "`nPulling Complete"
 
-PrintProfileNames
+$selectedProfileName = GetProfileNameFromUserSelection
 
-# Get profile names from the Profiles folder
-$profiles = GetProfileNames
+Write-Host "`nSelected profile name: $selectedProfileName`n"
 
-$profile = Read-Host -Prompt "Enter the profile name "
-
-# Until the profile name is not in the list, keep asking the user to enter the profile name
-while (-not ($profiles -contains $profile)) {
-    Write-Host "`nProfile does not exist"
-    PrintProfileNames
-    $profile = Read-Host -Prompt "Enter the profile name "
-    Write-Host "`nSelected profile name: $profile`n"
-}
-
-.\supportingFile.ps1 -profile $profile
+.\supportingFile.ps1 -profile $selectedProfileName
 
 winget upgrade --all
 
