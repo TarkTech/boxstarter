@@ -109,8 +109,6 @@ Write-Host "`nSelected profile name: $selectedProfileName`n"
 
 .\supportingFile.ps1 -profile $selectedProfileName
 
-winget upgrade --all
-
 # Set wallpaper
 .\setupWallpaper\setWallpaper.ps1
 
