@@ -103,6 +103,8 @@ git pull
 
 Write-Host "`nPulling Complete"
 
+cd setup
+
 $selectedProfileName = GetProfileNameFromUserSelection
 
 Write-Host "`nSelected profile name: $selectedProfileName`n"
