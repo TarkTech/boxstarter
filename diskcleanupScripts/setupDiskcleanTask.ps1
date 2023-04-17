@@ -8,7 +8,7 @@ function RemoveDirectoryFiles {
 
 Write-Host "`nInstalling Git"
 
-winget install -e --silent --id Git.Git;
+choco install git.install -y 
 
 refreshenv
 
@@ -42,11 +42,19 @@ Write-Host "`nPulling Complete"
 # Remove all files in the TEMP directory
 $tempFilePath = [System.IO.Path]::GetTempPath()
 
+Write-Host "Temp Folder Cleaning Started"
+
 RemoveDirectoryFiles -Path $tempFilePath
 RemoveDirectoryFiles -Path "C:\Windows\Temp"
 
+Write-Host "Temp Folder Cleaning Complete"
+
+Write-Host "All Disk cleanup started"
+
 # Cleanup C: drive using Disk Cleanup
 cleanmgr.exe /sagerun:66 /VeryLowDisk /AUTOCLEAN | Out-Null
+
+Write-Host "All Disk cleanup complete"
 
 # Add this script to the Task Scheduler to run at startup
 
