@@ -1,10 +1,10 @@
 Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowFileExtensions -EnableShowFullPathInTitleBar -EnableOpenFileExplorerToQuickAccess -EnableShowRecentFilesInQuickAccess -EnableShowFrequentFoldersInQuickAccess -EnableExpandToOpenFolder
 Enable-RemoteDesktop
 
-winget install -e --silent --id Mozilla.Firefox;
-winget install -e --silent --id Google.Chrome;
-winget install -e --silent --id ShareX.ShareX;
-winget install -e --silent --id Microsoft.Teams; 
+choco install firefox -y 
+choco install googlechrome -y 
+choco install sharex -y 
+choco install microsoft-teams.install -y 
 
 # Cleanup applications
 function removeApp {

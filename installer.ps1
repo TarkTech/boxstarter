@@ -63,33 +63,16 @@ function GetProfileNames {
     return $profiles
 }
 
-# installation of winget
+# installation of boxstarter
 
-if (Get-Command winget -ErrorAction SilentlyContinue) {
-    Write-Host "`nWinget already installed"
-} else {
-    Write-Host "`nWinget not installed"
-
-    Write-Host "`nInstalling winget"
-
-    # Install winget
-    $ProgressPreference='Silent'
-    Invoke-WebRequest -Uri https://github.com/microsoft/winget-cli/releases/download/v1.3.2691/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -OutFile .\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
-    Invoke-WebRequest -Uri https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx -OutFile Microsoft.VCLibs.x64.14.00.Desktop.appx
-    Add-AppxPackage Microsoft.VCLibs.x64.14.00.Desktop.appx
-    Add-AppxPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
-    
-    # Remove downloaded files
-    Remove-Item .\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
-    Remove-Item .\Microsoft.VCLibs.x64.14.00.Desktop.appx
-
-    Write-Host "`nWinget installed"
-}
-
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://boxstarter.org/bootstrapper.ps1')); Get-Boxstarter -Force
 
 Write-Host "`nInstalling Git"
 
-winget install -e --silent --id Git.Git;
+choco install git.install -y 
+
+$env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."   
+Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 
 refreshenv
 

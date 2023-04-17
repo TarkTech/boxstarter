@@ -30,7 +30,7 @@ Profiles
 | Base  | googlechrome, firefox, sharex, microsoft-teams, remove unnessasary software from system |
 | Frontend  | git, nodejs, vscode  |
 | FullStack  |  visualstudio2022 ( community addition ), dotnet-sdk-6.0 |
-| Mobile  |  android-studio, xamarin-studio |
+| Mobile  |  android-studio |
 | QA  |  notepad++ |
 
 ---
