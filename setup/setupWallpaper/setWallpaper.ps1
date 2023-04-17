@@ -1,4 +1,4 @@
-$MyWallpaper="C:\boxstarter\setupWallpaper\Tark-Wallpaper.png"
+$MyWallpaper="$PSScriptRoot\Tark-Wallpaper.png"
 $code = @' 
 using System.Runtime.InteropServices; 
 namespace Win32{ 
