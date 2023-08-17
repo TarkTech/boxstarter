@@ -40,6 +40,6 @@ Profiles
 
 # Installation
 
-Download Installer.exe file from <a href="https://git.tarktech.com/pub/boxstarter/-/raw/main/Installer.exe?inline=false" target="_blank">Click here</a>
+Download Installer.exe file from <a href="https://raw.githubusercontent.com/TarkTech/boxstarter/main/Installer.exe" target="_blank">Click here</a>
 
 Run Installer.exe file from your download directory
